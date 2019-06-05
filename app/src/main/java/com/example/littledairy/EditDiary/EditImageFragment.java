@@ -1,4 +1,4 @@
-package com.example.littledairy;
+package com.example.littledairy.EditDiary;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -16,6 +16,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import com.example.littledairy.R;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;

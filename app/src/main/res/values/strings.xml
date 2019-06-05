@@ -9,6 +9,5 @@
     <string name="mapImageDes">this is a map sample which indicates that this diary has a location on it  </string>
     <string name="testInfo">As you’re still reading this, I presume that you’re wanting try out these components for yourself. So before you get your java hat on, you need to start by adding the play-services-location dependancy to your build.gradle file.</string>
     <string name="imageDescriptionHint">write a description of the photo</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="noText"> you did not write anything </string>
 </resources>

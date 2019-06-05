@@ -11,7 +11,7 @@
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".EditActivity">
+        tools:context=".EditDiary.EditActivity">
 
         <EditText
             android:id="@+id/editText"
@@ -32,7 +32,7 @@
 
         <fragment
             android:id="@+id/ImageFragment"
-            android:name="com.example.littledairy.EditImageFragment"
+            android:name="com.example.littledairy.EditDiary.EditImageFragment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"

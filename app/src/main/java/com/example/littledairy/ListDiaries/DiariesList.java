@@ -1,7 +1,9 @@
-package com.example.littledairy;
+package com.example.littledairy.ListDiaries;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.example.littledairy.R;
 
 public class DiariesList extends AppCompatActivity {
 
