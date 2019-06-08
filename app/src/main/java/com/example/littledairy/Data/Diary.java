@@ -1,9 +1,15 @@
 package com.example.littledairy.Data;
 
-import java.util.Date;
+import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.TypeConverters;
 
+import java.util.Date;
+@Entity
 public class Diary {
     public int id;
+    @TypeConverters(Converters.class)
+    @ColumnInfo(name = "diaryDate")
     private Date dairyDate;
     private String dailyText;
 //Place

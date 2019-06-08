@@ -18,14 +18,21 @@ import com.example.littledairy.Data.Diary;
 import com.example.littledairy.EditDiary.EditActivity;
 import com.example.littledairy.R;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class DiariesListAdapter extends RecyclerView.Adapter<DiariesListAdapter.listViewHolder>{
     Context context ;
-    Diary[] diaries;
+    List<Diary> diaries;
 
-    public DiariesListAdapter(Context context , Diary[] list)
+    public DiariesListAdapter(Context context)
     {
      this.context = context;
-     this.diaries = list;
+    }
+
+    public void setDiaries(List<Diary> diaryArrayList){
+        diaries = diaryArrayList;
+        notifyDataSetChanged();
     }
     @NonNull
     @Override
@@ -36,13 +43,14 @@ public class DiariesListAdapter extends RecyclerView.Adapter<DiariesListAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull DiariesListAdapter.listViewHolder holder, int position) {
-        holder.onBind(diaries[position]);
+        holder.onBind(diaries.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return diaries == null? 0:diaries.length;
+        return diaries == null? 0:diaries.size();
     }
+
     class listViewHolder extends RecyclerView.ViewHolder {
         ImageView diaryImage , mapImage ;
         TextView diaryText , diaryDate;
