@@ -1,45 +1,146 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/cardView"
+    android:id="@+id/EditActivity_Layout"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
 
-    <android.support.constraint.ConstraintLayout
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/EditActivity_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".EditDiary.EditActivity">
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryDark"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <EditText
-            android:id="@+id/editText"
+        <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="8dp"
-            android:ems="10"
-            android:gravity="start|top"
-            android:hint="@string/textHint"
-            android:inputType="textMultiLine"
-            android:lines="4"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            />
+            android:layout_height="match_parent">
 
-        <fragment
-            android:id="@+id/ImageFragment"
-            android:name="com.example.littledairy.EditDiary.EditImageFragment"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editText" />
-    </android.support.constraint.ConstraintLayout>
+            <Button
+                android:id="@+id/EditActivity_cancel_btn"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:layout_gravity="end"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="8dp"
+                android:text="@string/cancel"
+                android:textColor="@color/colorWhite"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/EditActivity_date"
+                app:layout_constraintEnd_toStartOf="@+id/EditActivity_date"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/EditActivity_date" />
 
-</android.support.v7.widget.CardView>
+            <TextView
+                android:id="@+id/EditActivity_date"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_gravity="start"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:gravity="center"
+                android:text="date date data "
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textColor="@color/colorWhite"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/EditActivity_cancel_btn"
+                app:layout_constraintEnd_toStartOf="@+id/EditActivity_save_btn"
+                tools:layout_editor_absoluteX="104dp" />
+
+            <Button
+                android:id="@+id/EditActivity_save_btn"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="88dp"
+                android:layout_height="45dp"
+                android:layout_gravity="end"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="@string/save"
+                android:textColor="@color/colorWhite"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/EditActivity_date"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/EditActivity_date"
+                app:layout_constraintTop_toTopOf="@+id/EditActivity_date" />
+
+        </android.support.constraint.ConstraintLayout>
+    </android.support.v7.widget.Toolbar>
+
+    <android.support.v7.widget.CardView
+        android:layout_margin="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/EditActivity_toolbar"
+        android:id="@+id/EditActivity_cardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        tools:context=".EditDiary.EditActivity">
+
+                        <EditText
+                            android:id="@+id/EditActivity_editText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="16dp"
+                            android:ems="10"
+                            android:gravity="start|top"
+                            android:hint="@string/textHint"
+                            android:inputType="textMultiLine"
+                            android:lines="4"
+                          />
+
+                        <fragment
+                            android:layout_marginStart="16dp"
+                            android:layout_marginEnd="16dp"
+                            android:id="@+id/ImageFragment"
+                            android:name="com.example.littledairy.EditDiary.EditImageFragment"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/EditActivity_editText" />
+
+                        <TextView
+                            android:id="@+id/edit_place_result"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="16dp"
+                            android:gravity="center"
+                            android:text="@string/editPlaceTextView"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+                     <Button
+                         android:id="@+id/editPlaceBtn"
+                         android:layout_width="match_parent"
+                         android:layout_height="wrap_content"
+                         android:text="@string/editPlaceBtn"
+                         android:layout_margin="16dp"
+                         />
+                    </LinearLayout>
+            </ScrollView>
+    </android.support.v7.widget.CardView>
+</android.support.constraint.ConstraintLayout>

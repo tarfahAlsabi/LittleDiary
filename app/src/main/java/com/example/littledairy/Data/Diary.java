@@ -2,15 +2,14 @@ package com.example.littledairy.Data;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.TypeConverters;
+import android.os.Parcel;
+import android.os.Parcelable;
 
-import java.util.Date;
 @Entity
-public class Diary {
+public class Diary implements Parcelable {
     public int id;
-    @TypeConverters(Converters.class)
     @ColumnInfo(name = "diaryDate")
-    private Date dairyDate;
+    private String diaryDate;
     private String dailyText;
 //Place
     private int placeId;
@@ -20,16 +19,42 @@ public class Diary {
 
 //Image
     private int imageId;
-    private byte[] imageBytes;
-    private String imageDescreption;
+    private String imagePath;
 
+        public Diary(){
+            super();
+        }
+    protected Diary(Parcel in) {
+        id = in.readInt();
+        diaryDate = in.readString();
+        dailyText = in.readString();
+        placeId = in.readInt();
+        Latitudes = in.readFloat();
+        longitudes = in.readFloat();
+        placeName = in.readString();
+        imageId = in.readInt();
+        imagePath = in.readString();
 
-    public byte[] getImageBytes() {
-        return imageBytes;
     }
 
-    public Date getDairyDate() {
-        return dairyDate;
+    public static final Creator<Diary> CREATOR = new Creator<Diary>() {
+        @Override
+        public Diary createFromParcel(Parcel in) {
+            return new Diary(in);
+        }
+
+        @Override
+        public Diary[] newArray(int size) {
+            return new Diary[size];
+        }
+    };
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public String getDiaryDate() {
+        return diaryDate;
     }
 
     public float getLatitudes() {
@@ -56,9 +81,6 @@ public class Diary {
         return placeId;
     }
 
-    public String getImageDescreption() {
-        return imageDescreption;
-    }
 
     public String getPlaceName() {
         return placeName;
@@ -68,21 +90,18 @@ public class Diary {
         this.dailyText = dailyText;
     }
 
-    public void setDairyDate(Date dairyDate) {
-        this.dairyDate = dairyDate;
+    public void setDiaryDate(String diaryDate) {
+        this.diaryDate = diaryDate;
     }
 
     public void setId(int id) {
         this.id = id;
     }
 
-    public void setImageBytes(byte[] imageBytes) {
-        this.imageBytes = imageBytes;
+    public void setImagePath(String imagePath ) {
+        this.imagePath = imagePath;
     }
 
-    public void setImageDescreption(String imageDescreption) {
-        this.imageDescreption = imageDescreption;
-    }
 
     public void setImageId(int imageId) {
         this.imageId = imageId;
@@ -102,5 +121,23 @@ public class Diary {
 
     public void setPlaceName(String placeName) {
         this.placeName = placeName;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
+        dest.writeString(diaryDate);
+        dest.writeString(dailyText);
+        dest.writeInt(placeId);
+        dest.writeFloat(Latitudes);
+        dest.writeFloat(longitudes);
+        dest.writeString(placeName);
+        dest.writeInt(imageId);
+        dest.writeString(imagePath);
     }
 }

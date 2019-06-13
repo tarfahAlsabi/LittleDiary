@@ -2,9 +2,11 @@ package com.example.littledairy.Data;
 
 import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
+import android.arch.persistence.room.TypeConverters;
 import android.content.Context;
 
-@android.arch.persistence.room.Database(entities = {DiaryObject.class , DiaryImage.class , DiaryPlace.class}, version = 1, exportSchema = false)
+@android.arch.persistence.room.Database(entities = {DiaryObject.class , DiaryImage.class , DiaryPlace.class}, version = 3, exportSchema = false)
+@TypeConverters({Converters.class})
 public abstract class Database extends RoomDatabase {
     public abstract DiaryDAO diaryDAO();
     private static Database database;

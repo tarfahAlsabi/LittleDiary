@@ -8,13 +8,15 @@
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
         android:elevation="8dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" >
+        app:layout_constraintTop_toTopOf="parent">
+
         <android.support.constraint.ConstraintLayout
-            android:layout_height="match_parent"
-            android:layout_width="match_parent">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
             <TextView
                 android:id="@+id/diaryCard_date"
@@ -40,13 +42,15 @@
                 app:layout_constraintTop_toBottomOf="@+id/diaryCard_date" />
 
             <ImageView
-                android:contentDescription="@string/photoDes"
                 android:id="@+id/diaryCard_imageView"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
+                android:layout_marginBottom="8dp"
+                android:contentDescription="@string/photoDes"
                 android:scaleType="fitXY"
+                app:layout_constraintBottom_toTopOf="@+id/diaryCard_map"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/diaryCard_date"
                 tools:srcCompat="@android:drawable/ic_menu_report_image" />
@@ -57,17 +61,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginBottom="16dp"
                 android:text="@string/editButton"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/diaryCard_text" />
 
             <ImageView
-                android:contentDescription="@string/mapImageDes"
                 android:id="@+id/diaryCard_map"
                 android:layout_width="63dp"
                 android:layout_height="45dp"
                 android:layout_marginEnd="16dp"
+                android:contentDescription="@string/mapImageDes"
                 app:layout_constraintBottom_toBottomOf="@+id/diaryCard_editButton"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/diaryCard_editButton"

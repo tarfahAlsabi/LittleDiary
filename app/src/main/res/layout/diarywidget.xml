@@ -1,0 +1,30 @@
+<RelativeLayout
+    android:id="@+id/appwidget_layout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    android:padding="@dimen/widget_margin">
+
+    <TextView
+        android:id="@+id/appwidget_date_textV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:gravity="center"
+        android:background="@color/colorPrimaryDark"
+        android:textColor="@color/colorWhite"
+        android:textSize="18sp"
+        android:textStyle="bold|italic" />
+
+    <TextView
+        android:id="@+id/appwidget_diary_textV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/appwidget_date_textV"
+        android:layout_margin="8dp"
+        android:gravity="center"
+        android:textSize="18sp"
+        android:textColor="@color/colorPrimary"/>
+
+</RelativeLayout>

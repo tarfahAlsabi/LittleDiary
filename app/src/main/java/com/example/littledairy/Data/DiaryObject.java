@@ -19,18 +19,17 @@ public class DiaryObject {
     public int id;
     public int imageId;
     public int placeId;
-    @TypeConverters(Converters.class)
-    public Date diaryDate;
+    public String diaryDate;
     public String dailyText;
 
-    public DiaryObject (Date diaryDate , String dailyText , int imageId , int placeId){
+    public DiaryObject (String diaryDate , String dailyText , int imageId , int placeId){
         this.diaryDate = diaryDate;
         this.dailyText = dailyText;
         this.imageId   = imageId;
         this.placeId   = placeId;
     }
     @Ignore
-    public DiaryObject (Date diaryDate , String dailyText , int imageId , int placeId, int id){
+    public DiaryObject (String diaryDate , String dailyText , int imageId , int placeId, int id){
         this.diaryDate = diaryDate;
         this.dailyText = dailyText;
         this.imageId   = imageId;

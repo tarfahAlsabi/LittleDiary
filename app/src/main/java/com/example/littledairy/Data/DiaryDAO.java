@@ -8,6 +8,7 @@ import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Dao
@@ -24,8 +25,8 @@ public interface DiaryDAO {
     LiveData<List<Diary>> getAllDiaries();
 
     @Query("SELECT * FROM DiaryObject INNER JOIN DiaryPlace ON DiaryObject.placeId = DiaryPlace.placeId " +
-            "INNER JOIN DiaryImage ON DiaryImage.imageId =  DiaryObject.imageId WHERE id = :id")
-    Diary getDiary(int id);
+            "INNER JOIN DiaryImage ON DiaryImage.imageId =  DiaryObject.imageId WHERE diaryDate = :date")
+    Diary getDiary(String date);
 
     @Delete
     void deleteImage (DiaryImage diaryImage);

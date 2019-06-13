@@ -1,7 +1,11 @@
 <resources>
     <string name="app_name">Little Dairy</string>
     <string name="title_activity_maps">Map</string>
-    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyDZhfxvDdDIN0v-OVcNOqIUX21-tW0wEvE</string>
+
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false"> </string>
+    <string name="google_ads_key" templateMergeStrategy="preserve" translatable="false"> </string>
+    <string name="google_ads_banner_key" templateMergeStrategy="preserve" translatable="false"> </string>
+
     <string name="editButton">EDIT</string>
     <string name="photoButton">add/change photo</string>
     <string name="photoDes">there is no photo added</string>
@@ -10,4 +14,14 @@
     <string name="testInfo">As you’re still reading this, I presume that you’re wanting try out these components for yourself. So before you get your java hat on, you need to start by adding the play-services-location dependancy to your build.gradle file.</string>
     <string name="imageDescriptionHint">write a description of the photo</string>
     <string name="noText"> you did not write anything </string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+    <string name="searchPlaceholder">search for a place</string>
+    <string name="placeBtn">choose this place</string>
+    <string name="editPlaceBtn"> add/edit Place</string>
+    <string name="editPlaceTextView">no place is added</string>
+    <string name="listLabel">Diary List</string>
+    <string name="searchDate">search for a diary by its date</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
 </resources>

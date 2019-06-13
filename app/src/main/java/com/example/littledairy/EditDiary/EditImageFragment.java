@@ -1,12 +1,17 @@
 package com.example.littledairy.EditDiary;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
@@ -18,9 +23,11 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.littledairy.R;
+import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
+import java.io.File;
+import java.io.FileOutputStream;
 
 import static android.media.MediaRecorder.VideoSource.CAMERA;
 
@@ -30,7 +37,24 @@ public class EditImageFragment extends Fragment {
     final int GALLERY = 1110;
     ImageView imageView ;
     Context context;
+    String imagePath;
+    String date;
 
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public void setImage(String imagePath){
+        this.imagePath = imagePath;
+        if(imagePath != null){
+            Picasso.get().load(new File(imagePath)).placeholder(R.drawable.ic_baseline_broken_image_24px).into(imageView);
+            imageView.setVisibility(View.VISIBLE);
+        }
+    }
+
+    public String getImagePath(){
+        return imagePath;
+    }
 
     public EditImageFragment() {
         // Required empty public constructor
@@ -57,20 +81,18 @@ public class EditImageFragment extends Fragment {
         photoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                boolean permission = isStoragePermissionGranted();
+                if(permission)
                 showPictureDialog();
             }
         });
         return view;
     }
 
-
-
     private void showPictureDialog(){
         AlertDialog.Builder pictureDialog = new AlertDialog.Builder(context);
         pictureDialog.setTitle("Select Action");
-        String[] pictureDialogItems = {
-                "Select photo from gallery",
-                "Capture photo from camera" };
+        String[] pictureDialogItems = {"Select photo from gallery"};
         pictureDialog.setItems(pictureDialogItems,
                 new DialogInterface.OnClickListener() {
                     @Override
@@ -78,9 +100,6 @@ public class EditImageFragment extends Fragment {
                         switch (which) {
                             case 0:
                                 choosePhotoFromGallary();
-                                break;
-                            case 1:
-                                takePhotoFromCamera();
                                 break;
                         }
                     }
@@ -94,12 +113,6 @@ public class EditImageFragment extends Fragment {
 
         startActivityForResult(galleryIntent, GALLERY);
     }
-
-    private void takePhotoFromCamera() {
-        Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-        startActivityForResult(intent, CAMERA);
-    }
-
 
 
     @Override
@@ -118,33 +131,64 @@ public class EditImageFragment extends Fragment {
                 try {
                     Bitmap bmp = MediaStore.Images.Media.getBitmap(context.getContentResolver(), contentURI);
                     saveImage(bmp);
-                } catch (IOException e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                     Toast.makeText(context, "Failed!", Toast.LENGTH_SHORT).show();
                 }
             }
+        }
 
-        } else if (requestCode == CAMERA) {
-            Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
-            saveImage(thumbnail);
+    }
+
+
+    public void saveImage(Bitmap bmp){
+        File root = context.getDir("images",context.MODE_PRIVATE);
+//                Environment.getExternalStorageDirectory().toString();
+        File myDir = new File(root + "/saved_images");
+        myDir.mkdirs();
+        String fname = "Image-"+ date +".jpg";
+        File file = new File (myDir, fname);
+        if (file.exists ()) file.delete ();
+        try {
+            FileOutputStream out = new FileOutputStream(file);
+            bmp.compress(Bitmap.CompressFormat.JPEG, 90, out);
+            out.flush();
+            out.close();
+            Toast.makeText(context, "Image Saved!", Toast.LENGTH_SHORT).show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(context, "Can't Save Image ", Toast.LENGTH_SHORT).show();
+        }
+        imagePath  = file.getAbsolutePath();
+        Picasso.get().load(file).placeholder(R.drawable.ic_baseline_broken_image_24px).into(imageView);
+//        imageView.setImageBitmap(bmp);
+        Log.i("image Path",imagePath);
+    }
+
+
+    public  boolean isStoragePermissionGranted() {
+        String TAG = "ispermission";
+        if (Build.VERSION.SDK_INT >= 23) {
+            if (context.checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    == PackageManager.PERMISSION_GRANTED) {
+                Log.v(TAG,"Permission is granted");
+                return true;
+            } else {
+                Log.v(TAG,"Permission is revoked");
+                ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 2);
+                return false;
+            }
+        }
+        else { //permission is automatically granted on sdk<23 upon installation
+            Log.v(TAG,"Permission is granted");
+            return true;
         }
     }
-    public void saveImage(Bitmap bmp){
-        imageView.setImageBitmap(bmp);
-        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
-        byte[] byteArray = stream.toByteArray();
-        bmp.recycle();
-        Toast.makeText(context, "Image Saved!", Toast.LENGTH_SHORT).show();
-
-    }
-
-
 
     @Override
     public void onDetach() {
         super.onDetach();
     }
-
 
 }
