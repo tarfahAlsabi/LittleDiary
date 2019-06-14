@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.DatePicker;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.example.littledairy.Data.Diary;
 import com.example.littledairy.Data.DiaryViewModel;
@@ -39,6 +40,7 @@ private Context context = this;
                 overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
             }
         });
+        TextView noResult =findViewById(R.id.Diaries_list_no_result);
         diaryViewModel = ViewModelProviders.of(this).get(DiaryViewModel.class);
         RecyclerView recyclerView = findViewById(R.id.Diaries_list_RecyclerView);
         final DiariesListAdapter adapter = new DiariesListAdapter(this);
@@ -81,7 +83,12 @@ private Context context = this;
                                         runOnUiThread(new Runnable() {
                                             @Override
                                             public void run() {
-                                                adapter.setDiaries(foundDiary);
+                                                if(foundDiary != null) {
+                                                    noResult.setVisibility(View.GONE);
+                                                    adapter.setDiaries(foundDiary);
+                                                }
+                                                else
+                                                    noResult.setVisibility(View.VISIBLE);
                                             }
                                         });
                                     }
@@ -91,8 +98,6 @@ private Context context = this;
                         }, mYear, mMonth, mDay);
                 datePickerDialog.show();
             }
-
         });
     }
-
 }

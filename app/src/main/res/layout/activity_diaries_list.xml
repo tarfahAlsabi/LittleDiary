@@ -44,6 +44,17 @@
     </RelativeLayout>
 
 </android.support.v7.widget.Toolbar>
+
+    <TextView
+        android:id="@+id/Diaries_list_no_result"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:text="@string/searchNoResult"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="24sp"
+        android:visibility="gone" />
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">

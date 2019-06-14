@@ -118,26 +118,30 @@ public class EditActivity extends AppCompatActivity {
         }
     }
 
-    public void saveDiary(){
+    public void saveDiary() {
         diary.setImagePath(ImageFragment.getImagePath());
         diary.setDailyText(diaryText.getText().toString());
-        Thread thread = new Thread() {
-            @Override
-            public void run() {
-                viewModel = ViewModelProviders.of(edit).get(DiaryViewModel.class);
-                if(diary.getId() != 0)
-                {viewModel.updateDiary(diary);}
-                else
-                { viewModel.insertDiary(diary);}
+        Intent intent = new Intent(context, MainActivity.class);
+        if (diary.getDailyText() != null) {
+            Thread thread = new Thread() {
+                @Override
+                public void run() {
+                    viewModel = ViewModelProviders.of(edit).get(DiaryViewModel.class);
+                    if (diary.getId() != 0) {
+                        viewModel.updateDiary(diary);
+                    } else {
+                        viewModel.insertDiary(diary);
+                    }
 //                Toast.makeText(getApplicationContext(), "diary Saved!", Toast.LENGTH_SHORT).show();
-
-                Intent intent= new Intent(context, MainActivity.class );
-                intent.putExtra("diary",diary);
-                startActivity(intent);
-            }
-        };
-        thread.start();
-   }
+                    intent.putExtra("diary", diary);
+                    startActivity(intent);
+                }
+            };
+            thread.start();
+        }else {
+            startActivity(intent);
+        }
+    }
     public void cancelDiary(){
             finish();
     }

@@ -22,6 +22,7 @@
     <string name="editPlaceTextView">no place is added</string>
     <string name="listLabel">Diary List</string>
     <string name="searchDate">search for a diary by its date</string>
+    <string name="searchNoResult">there is no diary in the selected date</string>
     <string name="appwidget_text">EXAMPLE</string>
     <string name="add_widget">Add widget</string>
 </resources>
