@@ -50,7 +50,6 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
                 android:gravity="center"
-                android:text="date date data "
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 android:textColor="@color/colorWhite"
                 app:layout_constraintBottom_toBottomOf="parent"
