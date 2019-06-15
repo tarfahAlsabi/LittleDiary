@@ -122,7 +122,7 @@ public class EditActivity extends AppCompatActivity {
         diary.setImagePath(ImageFragment.getImagePath());
         diary.setDailyText(diaryText.getText().toString());
         Intent intent = new Intent(context, MainActivity.class);
-        if (diary.getDailyText() != null) {
+        if (diary.getDailyText() != null && !diary.getDailyText().isEmpty()) {
             Thread thread = new Thread() {
                 @Override
                 public void run() {
@@ -132,14 +132,20 @@ public class EditActivity extends AppCompatActivity {
                     } else {
                         viewModel.insertDiary(diary);
                     }
-//                Toast.makeText(getApplicationContext(), "diary Saved!", Toast.LENGTH_SHORT).show();
                     intent.putExtra("diary", diary);
                     startActivity(intent);
+                    runOnUiThread(new Runnable() {
+                        public void run() {
+                            Toast.makeText(getApplicationContext(),"diary Saved!", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
                 }
             };
             thread.start();
         }else {
             startActivity(intent);
+            Toast.makeText(getApplicationContext(),"diary is empty nothing is saved ", Toast.LENGTH_SHORT).show();
         }
     }
     public void cancelDiary(){
